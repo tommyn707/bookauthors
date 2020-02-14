@@ -1,0 +1,768 @@
+env/lib/python3.8/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/db/backends/utils.py", line 76, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/db/utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/db/backends/sqlite3/base.py", line 383, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: table books_author_app_books has no column named title
+>>> quit()
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_author_app, contenttypes, sessions
+Running migrations:
+  Applying books_author_app.0002_auto_20200214_2004... OK
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py shell
+Python 3.8.1 (v3.8.1:1b293b6006, Dec 18 2019, 14:08:53)
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_author_app.model import books, authors
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'books_author_app.model'
+>>> from books_author_app.models import books, authors
+>>>     newly_created_book = books.objects.create(title="C sharp",description="none")
+  File "<console>", line 1
+    newly_created_book = books.objects.create(title="C sharp",description="none")
+    ^
+IndentationError: unexpected indent
+>>> newly_created_book = books.objects.create(title="C sharp",description="none")
+>>> print newly_created_book
+  File "<console>", line 1
+    print newly_created_book
+          ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print(newly_created_book)?
+>>> y
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'y' is not defined
+>>> print(newly_created_book
+... print(newly_created_book)
+  File "<console>", line 2
+    print(newly_created_book)
+    ^
+SyntaxError: invalid syntax
+>>> print(newly_created_book)
+books object (1)
+>>> newly_created_book = books.objects.create(title="Java",description="none")
+>>> newly_created_book = books.objects.create(title="Python",description="none")
+>>> newly_created_book = books.objects.create(title="PHP",description="none")
+>>> newly_created_book = books.objects.create(title="Ruby",description="none")
+>>> newly_created_author = authors.objects.create(first_name="Jane",last_name="Austen")
+>>> newly_created_author = authors.objects.create(first_name="Emily",last_name="Dickinson")
+>>> newly_created_author = authors.objects.create(first_name="Fyodor",last_name="Dostoevksy")
+>>> newly_created_author = authors.objects.create(first_name="William",last_name="Shakespeare")
+>>> newly_created_author = authors.objects.create(first_name="Lau",last_name="Tzu")
+>>> quit()
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_author_app, contenttypes, sessions
+Running migrations:
+  No migrations to apply.
+  Your models have changes that are not yet reflected in a migration, and so won't be applied.
+  Run 'manage.py makemigrations' to make new migrations, and then re-run 'manage.py migrate' to apply them.
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to authors without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> none
+Invalid input: name 'none' is not defined
+>>> 1
+Migrations for 'books_author_app':
+  books_author_app/migrations/0003_authors_notes.py
+    - Add field notes to authors
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_author_app, contenttypes, sessions
+Running migrations:
+  Applying books_author_app.0003_authors_notes... OK
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py shell
+Python 3.8.1 (v3.8.1:1b293b6006, Dec 18 2019, 14:08:53)
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_author_app.models import books, authors
+>>> book_to_update = books.objects.get(id=1)
+>>> books_to_update.title = "C#"
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'books_to_update' is not defined
+>>> book_to_update.title = "C#"
+>>> authors_to_update = authors.objects.get(id=4)
+>>> authors_to_update.first_name = "bill"
+>>> quit()
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 10, in <module>
+    class authors(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 14, in authors
+    author = models.ForeignKey(author, related_name="books", on_delete = models.CASCADE)
+NameError: name 'author' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 10, in <module>
+    class authors(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 14, in authors
+    author = models.ForeignKey(author, related_name="books", on_delete = models.CASCADE)
+NameError: name 'author' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 10, in <module>
+    class authors(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 14, in authors
+    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    author = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    author = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigration
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    author = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigration
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    author = models.ForeignKey(author, related_name="books", on_delete = models.CASCADE)
+NameError: name 'author' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigration
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    author = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigration
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigration
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigration
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    who = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigration
+Traceback (most recent call last):
+  File "manage.py", line 21, in <module>
+    main()
+  File "manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 381, in execute_from_command_line
+    utility.execute()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 357, in execute
+    django.setup()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/registry.py", line 114, in populate
+    app_config.import_models()
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/site-packages/django/apps/config.py", line 211, in import_models
+    self.models_module = import_module(models_module_name)
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/env/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 4, in <module>
+    class books(models.Model):
+  File "/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/models.py", line 7, in books
+    who = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+NameError: name 'authors' is not defined
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigration
+Unknown command: 'makemigration'. Did you mean makemigrations?
+Type 'manage.py help' for usage.
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+You are trying to add a non-nullable field 'who' to books without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> exit
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+You are trying to add a non-nullable field 'authors' to books without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> 1
+Migrations for 'books_author_app':
+  books_author_app/migrations/0004_books_authors.py
+    - Add field authors to books
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_author_app, contenttypes, sessions
+Running migrations:
+  Applying books_author_app.0004_books_authors... OK
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py shell
+Python 3.8.1 (v3.8.1:1b293b6006, Dec 18 2019, 14:08:53)
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_author_app
+  File "<console>", line 1
+    from books_author_app
+                        ^
+SyntaxError: invalid syntax
+>>> from books_author_app.models import authors,books
+>>> this_author = author.objects.get(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'author' is not defined
+>>> this_author = authors.objects.get(id=1)
+>>> this_book = books.objects.get(id=1)
+>>> this_author.books.add(this_book)
+>>> this_book = books.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_author.books.all()
+<QuerySet [<books: books object (1)>, <books: books object (2)>, <books: books object (3)>, <books: books object (4)>, <books: books object (5)>]>
+>>> this_book.author.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'books' object has no attribute 'author'
+>>> this_book.authors.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'authors' object has no attribute 'all'
+>>> this_books.author.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'this_books' is not defined
+>>> this_books.author.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'this_books' is not defined
+>>> this_book.author.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'books' object has no attribute 'author'
+>>> this_author =authors.object.get(id=2)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'authors' has no attribute 'object'
+>>> this_author =author.object.get(id=2)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'author' is not defined
+>>> this_author =authors.object.get(id=2)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'authors' has no attribute 'object'
+>>> from books_author_app import authors, books
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ImportError: cannot import name 'authors' from 'books_author_app' (/Users/LushiZeng/Desktop/Dojo_Assignment/Python/django/django_orm/books/books_authors_proj/books_author_app/__init__.py)
+>>> quit()
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py makemigrations
+No changes detected
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_author_app, contenttypes, sessions
+Running migrations:
+  No migrations to apply.
+(env) Lushis-MacBook-Air:books_authors_proj LushiZeng$ python manage.py shell
+Python 3.8.1 (v3.8.1:1b293b6006, Dec 18 2019, 14:08:53)
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_author_app.model import authors,books
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'books_author_app.model'
+>>> from books_author_app.models import authors,books
+>>> this_author = authors.objects.get(id=2)
+>>> this_book = book.objects.get(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'book' is not defined
+>>> this_book = books.objects.get(id=1)
+>>> this_author.books.add(this_book)
+>>> this_book = books.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_book = books.objects.get(id=3)
+>>> this_author.books.add(this_book)
+>>> this_author = authors.object.get(id=3)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'authors' has no attribute 'object'
+>>> this_author2 = authors.object.get(id=3)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'authors' has no attribute 'object'
+>>> this_author2 = author.objects.get(id=3)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'author' is not defined
+>>> this_author2 = authors.objects.get(id=3)
+>>> this_book = books.objects.get(id=1)
+>>> this_author2.books.add(this_book)
+>>> this_book = books.objects.get(id=2)
+>>> this_author2.books.add(this_book)
+>>> this_book = books.objects.get(id=3)
+>>> this_author2.books.add(this_book)
+>>> this_book = books.objects.get(id=4)
+>>> this_author2.books.add(this_book)
+>>> this_author = authors.objects.get(id=4)
+>>> this_book= books.objects.get(id=1)
+>>> this_author.books.add(this_book)
+>>> this_book= books.objects.get(id=2)
+>>> this_author.books.add(this_book)
+>>> this_book= books.objects.get(id=3)
+>>> this_author.books.add(this_book)
+>>> this_book= books.objects.get(id=4)
+>>> this_author.books.add(this_book)
+>>> this_book= books.objects.get(id=5)
+>>> this_author.books.add(this_book)
+>>> this_book = books.objects.get(id=3)
+>>> this_book.authors.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'authors' object has no attribute 'all'
+>>> this_book.author.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'books' object has no attribute 'author'
+>>> this_book.authors.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'authors' object has no attribute 'all'
+>>> this_book = book.objects.get(id=4)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'book' is not defined
+>>> this_book = books.objects.get(id=4)
+>>> this_book
+<books: books object (4)>
+>>>
