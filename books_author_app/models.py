@@ -13,6 +13,6 @@ class authors(models.Model):
 class books(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    authors = models.ForeignKey(authors, related_name="books", on_delete = models.CASCADE)
+    authors = models.ManyToManyField(authors, related_name="books")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

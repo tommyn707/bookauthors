@@ -766,3 +766,6 @@ NameError: name 'book' is not defined
 >>> this_book
 <books: books object (4)>
 >>>
+<QuerySet [<authors: authors object (2)>, <authors: authors object (3)>, <authors: authors object (4)>]>
+<QuerySet [<books: books object (1)>, <books: books object (2)>, <books: books object (3)>, <books: books object (4)>]>
+<QuerySet [<authors: authors object (4)>]>
