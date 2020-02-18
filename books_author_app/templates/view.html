@@ -13,18 +13,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>View Book</h1>
-        {% csrf_token %}
+        
+        <h1>Title Of The Book</h1>
+        <!-- {% csrf_token %} -->
         <h2>{{books.title}}</h2>
-        <table class="table">
-            {% for books in books.all %}
-            <tr>
-                <td>
-                    {{books.description}}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+        <h4>Description</h4>
+        <p>{{books.description}}</p>
+        <h4>Authors</h4>
+        <!-- <p>{{authors.first_name}} {{authors.last_name}}</p> -->
+        <p>{{books.authors.all}}</p>
     </div>
 </body>
 </html>

@@ -16,7 +16,7 @@ def create_books(request):
 def view(request, id):
     context ={
         "books":books.objects.get(id=id),
-        "authors":authors.objects.get(id=id)
+        # "authors":authors.objects.get(id=id)
     }
     return render(request, "view.html", context)
 

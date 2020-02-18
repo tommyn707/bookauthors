@@ -15,8 +15,8 @@
     <div class="container">
     <h1 class="display-4">All Authors</h1 class="display-4">
     <ul>
-    {% for authors in author %}
-        <li>{{ authors.full }}</li>
+    {% for authors in Authors %}
+        <li>{{ authors.first_name }}</li>
     {% endfor %}
     </ul>
     <h2>New book</h2>

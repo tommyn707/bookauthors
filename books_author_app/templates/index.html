@@ -14,10 +14,10 @@
 <body>
     <div class="container">
     <h1 class="display-4">All Books</h1 class="display-4">
-    <ul>
+    <ul class="list-group-item">
     {% for books in books %}
-        <li>{{ books.title }}</li>
-        <li>
+        <li class="list-group-item">{{ books.title }}</li>
+        <li class="list-group-item">
         <td>
             <a href="view/{{books.id}}">View</a>
         </td>
